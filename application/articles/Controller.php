@@ -1,63 +1,24 @@
 <?php
+include_once SITE_PATH . '/application/articles/ModelArticles.php';  
 
-class Controller {
-    
-    private $_action;
-    private $_datas = array();
-    private $_view;
-    
-    public function __construct($actionUrl) {
-        $this->_action  = $actionUrl;
-        
+class Controller extends CommonController{
+
+    protected function _process(){
+        $model_article = new ModelArticles();
         if($this->_action === 'details'){
-            $this->_article($_GET['id']);
-        }  else {
-            $this->_articles();
+            $this->_datas = $model_article->article($_GET['id']);
+            $this->_view = 'articles/article_detail.php';
+        }  else if($this->_action === 'form'){
+            $this->_view = 'articles/article_form.php';
+        } else if ($this->_action === 'ajax') {
+            echo $model_article->articlesJson();
+            exit;
+            //echo json_encode($model_article->articles());
+        }else {
+            $this->_datas = $model_article->articles();
+            $this->_view = 'articles/articles.php';
         }
-
     }
-    
-    
-    private function _articles()
-    {
-        
-        $db = Db::connect();
-
-        $results = $db->query( 'SELECT * FROM articles' );
-
-        if( !$db->errno && $results->num_rows > 0 )
-        {
-            $this->_datas[ 'articles' ] = $results;
-        }
-
-        $this->_view = 'articles/articles.php';
-    }
-
-
-    private function _article( $id )
-    {
-        $db = Db::connect();
-
-        $results = $db->query( 'SELECT * FROM articles WHERE IdArticle = \''.$db->real_escape_string($id).'\'' );
-
-        if( !$db->errno && $results->num_rows > 0 )
-        {
-            $this->_datas[ 'article' ] = $results;
-        }
-
-        $this->_view = 'articles/article_detail.php';
-
-    }
-    
-    public function get_view(){
-        return $this->_view;
-    }
-    
-    public function get_datas(){
-        return $this->_datas;
-    }
-    
-    
     
 }
 

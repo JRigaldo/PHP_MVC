@@ -5,10 +5,12 @@ define ( 'SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] . $site_url );
 
 
 include SITE_PATH . '/includes/Db.php';
+include SITE_PATH . '/includes/components/CommonController.php';
 
 
 $page = (isset ($_GET['page'])) ? $_GET['page'] : 'articles';
 $action = (isset ($_GET['action'])) ? $_GET['action'] : '';
+
 include SITE_PATH .'/application/'. $page . '/Controller.php';
 
 $ctrl = new Controller($action);
