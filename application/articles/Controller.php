@@ -6,7 +6,7 @@ class Controller extends CommonController{
     protected function _process(){
         $model_article = new ModelArticles();
         if($this->_action === 'details'){
-            $this->_datas = $model_article->article($_GET['id']);
+            $this->_datas = $model_article->article($this->_router);
             $this->_view = 'articles/article_detail.php';
         }  else if($this->_action === 'form'){
             $this->_view = 'articles/article_form.php';

@@ -10,10 +10,14 @@ class CommonController{
     protected $_action;
     protected $_view;
     protected $_datas = array();
+    protected $_router;
     
     
-    public function __construct($actionUrl){
+    public function __construct($actionUrl, $routerUrl){
         $this->_action = $actionUrl;
+        
+        $this->_router = $routerUrl;
+        
         $this->_process();
     }
     public function get_view(){
