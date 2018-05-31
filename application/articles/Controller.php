@@ -1,4 +1,9 @@
 <?php
+namespace application\articles;
+
+use includes\components\CommonController;
+use application\articles\ModelArticles;
+
 include_once SITE_PATH . '/application/articles/ModelArticles.php';  
 
 class Controller extends CommonController{

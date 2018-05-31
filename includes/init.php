@@ -16,16 +16,10 @@ session_start();
 include SITE_PATH . '/includes/components/CommonController.php';
 
 /* Gestion des templates et des controller */
-include SITE_PATH .'/application/'. Bootstrap::get_page() . '/Controller.php';
-
-$ctrl = new Controller(Bootstrap::get_action(), Bootstrap::get_router());
-
-$view = $ctrl->get_view();
-$datas = $ctrl->get_datas();
-
+include SITE_PATH . '/includes/Template.php';
+Template::page();
 
 //echo '<pre>', var_dump($datas), '</pre>';
 
-include SITE_PATH . '/view/page.php';
 
 ?>

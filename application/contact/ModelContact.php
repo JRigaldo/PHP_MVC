@@ -1,5 +1,7 @@
 <?php
 
+namespace application\contact;
+
 class ModelContact {
     public function checkMessageSent( $action )
     {
